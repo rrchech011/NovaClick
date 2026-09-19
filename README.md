@@ -1,33 +1,41 @@
+[README.md](https://github.com/user-attachments/files/32425082/README.md)
 # ⚡ NovaClick
 
-Modern arayüzlü, gelişmiş ve açık kaynaklı otomatik tıklayıcı (autoclicker). Windows için geliştirildi.
+**🇹🇷 [Türkçe](#-türkçe) · 🇬🇧 [English](#-english)**
+
+![NovaClick screenshot](screenshot.png)
 
 > 🤖 **Bu proje, Anthropic'in yapay zekâ asistanı [Claude](https://claude.ai) ile birlikte geliştirilmiştir.**
+> 🤖 **Built together with [Claude](https://claude.ai), Anthropic's AI assistant.**
 
-![NovaClick ekran görüntüsü](screenshot.png)
+**⬇️ [Download / İndir](../../releases/latest)** — `novaclick.exe` (Windows 10/11, 64-bit)
 
-**⬇️ [Son sürümü indir](../../releases/latest)** — Python gerekmez, `novaclick.exe` dosyasına çift tıklaman yeterli.
+---
+
+# 🇹🇷 Türkçe
+
+Modern arayüzlü, gelişmiş ve açık kaynaklı otomatik tıklayıcı (autoclicker). Windows için geliştirildi. Arayüz **Türkçe ve İngilizce** (Ayarlar → Dil).
 
 ## Özellikler
 
-- **Hassas aralık:** saat / dakika / saniye / milisaniye + hızlı CPS ön ayarları (1, 5, 10, 20, 50, 100)
-- **Rastgele sapma (jitter):** ±0–500 ms, insan benzeri tıklama aralığı
-- **Fare tuşu ve tür:** sol / sağ / orta tuş; tek / çift / üçlü tıklama
-- **Tekrar:** sonsuz ya da belirli sayıda
-- **Konum:** imleç konumunda veya sabit koordinatta (ekrandan seçilebilir)
-- **Arka plan modu (Windows):** seçtiğin pencerenin belirli noktasına, fareni hareket ettirmeden tıklar; Alt-Tab yapıp bilgisayarı normal kullanabilirsin
-- **Global kısayol:** varsayılan `F6`, değiştirilebilir; *Aç/Kapa* ve *Basılı Tut* modları
-- **Güvenlik:** başlangıç gecikmesi, acil durdurma (fareyi sol üst köşeye götür)
-- **Canlı istatistik:** toplam tıklama, anlık CPS, süre, ilerleme çubuğu
-- **Profiller:** ayarları isimle kaydet / yükle / sil
-- **Tema:** koyu tasarım, 5 vurgu rengi, her zaman üstte seçeneği
+- **Hassas aralık:** saat / dakika / saniye / milisaniye, hızlı CPS ön ayarları, rastgele sapma (jitter)
+- **Basılı tutma süresi:** oyunların kaçırdığı tıklamaları azaltır
+- **4 tıklama yöntemi:** İmleç · Sabit nokta · **Pencere (oyun modu)** · Arka plan
+- **Pencere modu:** seçtiğin pencerenin belirli noktasına gerçek fare girdisiyle tıklar, pencere aktif değilken duraklar (ya da öne getirir)
+- **Nokta dizisi ve makro kaydı:** birden fazla noktaya sırayla tıkla, her noktaya kendi bekleme süresini ver, tıklamalarını kaydet (`F7`)
+- **Oyun ön ayarları:** tıklama simülatörü, hızlı, insan gibi, turbo
+- **Global kısayol:** varsayılan `F6`, değiştirilebilir; Aç/Kapa ve Basılı Tut
+- **Güvenlik:** başlangıç gecikmesi, süre sınırı, tekrar sayısı, acil durdurma (fareyi sol üst köşeye götür)
+- **Canlı istatistik:** tıklama sayısı, anlık CPS, süre ve CPS grafiği
+- **Test tıklaması ve tanılama:** seçtiğin yöntemin hedefte çalışıp çalışmadığını 3 tıklamayla dene; kısayolun alınıp alınmadığını ve yönetici yetkisi uyumsuzluğunu gör
+- **Profiller**, 5 vurgu rengi, her zaman üstte, sistem tepsisine küçültme
 
 ## Kurulum
 
 ### 1) Hazır exe (en kolayı)
-[Releases](../../releases/latest) sayfasından `novaclick.exe` dosyasını indir ve çift tıkla. Python kurmana, kurulum yapmana gerek yok; Windows 10/11 (64 bit) yeterli. Exe, GitHub Actions ile bu depodaki kaynak koddan otomatik üretilir.
+[Releases](../../releases/latest) sayfasından `novaclick.exe` dosyasını indir ve çift tıkla. Python kurmana gerek yok. Exe, GitHub Actions ile bu depodaki kaynak koddan otomatik üretilir.
 
-> ⚠️ İlk açılışta Windows bir uyarı gösterebilir. Bu normaldir, nedenini ve nasıl geçeceğini [aşağıda](#windows-uyarısı-smartscreen) anlattım.
+> ⚠️ İlk açılışta Windows bir uyarı gösterebilir. Bu normaldir, [aşağıda](#windows-uyarısı-smartscreen) anlattım.
 
 ### 2) Kaynak koddan çalıştırma
 [Python 3.10+](https://www.python.org/downloads/) kurulu olmalı (kurulumda **Add python.exe to PATH** işaretli olsun).
@@ -40,74 +48,128 @@ python novaclick.py
 ```
 
 ### 3) Kendi exe'ni üret
-`build.bat` dosyasına çift tıkla, ya da:
+`build.bat` dosyasına çift tıkla.
 
-```bash
-pip install pyinstaller
-pyinstaller --noconsole --onefile --clean --icon=novaclick.ico --add-data "novaclick.ico;." --collect-all customtkinter novaclick.py
-```
+## Tıklama yöntemleri
 
-Exe `dist\novaclick.exe` olarak oluşur.
+| Yöntem | Ne yapar | Ne zaman |
+|---|---|---|
+| **İmleç** | Fare neredeyse orada tıklar | Basit kullanım |
+| **Sabit** | Ekranda sabit bir koordinata tıklar | Tek ekranlı, sabit arayüzler |
+| **Pencere** | Seçilen pencerenin içindeki noktaya gerçek fare girdisiyle tıklar; pencere aktif değilse duraklar veya öne getirir | **Oyunlar** |
+| **Arka plan** | Pencereye tıklama mesajı yollar, fareyi kullanmaz | Tarayıcı, klasik programlar |
 
-## Windows uyarısı (SmartScreen)
-
-Exe'yi ilk çalıştırdığında **"Windows kişisel bilgisayarınızı korudu"** ekranı çıkabilir ve yayımcı olarak "Bilinmeyen yayımcı" yazabilir. Bunun nedeni, exe'nin henüz dijital olarak imzalı olmaması ve Windows'un yeni, tanınmayan dosyalara temkinli davranmasıdır. Dosyanın zararlı olduğu anlamına gelmez. Şu an exe imzalı değil.
-
-**Çalıştırmak için:**
-
-1. Uyarı ekranında **Ek bilgi**'ye tıkla.
-2. Çıkan **Yine de çalıştır** düğmesine bas.
-
-**Güvenmek istersen:**
-
-- Kaynak kodun tamamı bu depoda açık. Exe, bu koddan GitHub Actions ile otomatik üretilir; **Actions** sekmesinde üretim kayıtlarını görebilirsin.
-- Program yalnızca senin seçtiğin kısayol tuşunu (varsayılan `F6`) dinler, yazdıklarını kaydetmez. İnternete bağlanmaz; yazdığı tek dosya ayar dosyasıdır (`~/.novaclick.json`). Kodu `novaclick.py` içinde inceleyebilirsin.
-- Exe'yi [VirusTotal](https://www.virustotal.com)'a yükleyip kontrol edebilirsin.
-- İstersen exe yerine kaynak koddan çalıştır ya da `build.bat` ile exe'yi kendin üret.
-
-Klavye kısayolu dinleyen, PyInstaller ile üretilmiş programlar bazı antivirüslerde yanlış alarm verebilir. Böyle bir durumda yukarıdaki yollardan birini kullanabilirsin.
+### Oyunlar için notlar
+- **Basılı tutma** süresini 10–30 ms yap. Oyunlar tıklamayı tek karede yakalamaya çalışır.
+- Oyunlarda **Pencere** yöntemini kullan. **Arka plan** yöntemi çoğu oyunda çalışmaz, çünkü oyunlar bu mesajları yok sayar.
+- Oyun yönetici olarak çalışıyorsa NovaClick'i de yönetici olarak başlat (**Ayarlar → Tanılama → Yönetici olarak yeniden başlat**). Aksi halde Windows hem tıklamayı hem kısayolu engeller.
+- Pencere modunda gerçek fare kullanıldığı için, oyun aktifken fareni başka iş için kullanamazsın. **Öne getir** seçeneği bunu hafifletir ama deneyseldir ve her tıklamada kısa bir titreme yapar.
+- Bazı oyunlar otomatik tıklamayı yasaklar. Kuralları kontrol et.
 
 ## Kullanım
 
-1. Aralığı ve tıklama ayarlarını seç.
-2. `F6` ile başlat, tekrar `F6` ile durdur (ya da **BAŞLAT** düğmesi).
-3. Fare modunda acil durdurma için imleci ekranın sol üst köşesine götür.
+1. **Tıklama** sayfasında aralığı ve tıklama ayarlarını seç.
+2. **Hedef** sayfasında yöntemi seç. Pencere/Arka plan için **Pencere seç**'e bas ve hedef pencerede tıklanmasını istediğin noktaya bir kez tıkla.
+3. `F6` ile başlat, tekrar `F6` ile durdur.
+4. Sabit/İmleç yönteminde acil durdurma için fareyi ekranın sol üst köşesine götür.
 
-### Arka plan modu
+## Windows uyarısı (SmartScreen)
 
-1. **Tıklama konumu** kartında **Arka plan**'ı seç.
-2. **Pencere seç**'e bas, hedef pencerede tıklanmasını istediğin noktaya bir kez tıkla.
-3. `F6` ile başlat. Artık fareni ve klavyeni özgürce kullanabilirsin.
+Exe'yi ilk çalıştırdığında **"Windows kişisel bilgisayarınızı korudu"** ekranı çıkabilir. Bunun nedeni exe'nin henüz dijital olarak imzalı olmaması ve Windows'un yeni dosyalara temkinli davranmasıdır; dosyanın zararlı olduğu anlamına gelmez.
 
-Bu mod Windows'un pencere mesajlarını kullanır. Bilinen sınırlar:
+**Çalıştırmak için:** **Ek bilgi** → **Yine de çalıştır**.
 
-- Her programda çalışmaz; bazı oyunlar, tarayıcı/Electron ve Microsoft Store uygulamaları bu mesajları yok sayabilir.
-- Yönetici olarak çalışan bir programa tıklatmak için NovaClick'i de yönetici olarak çalıştır.
-- Hedef pencere küçültülürse bazı programlar tıklamayı almaz.
-- Ekran ölçeklemesi (%125, %150…) eski tip programlarda seçilen noktayı kaydırabilir.
-- Bu modda acil durdurma köşesi kapalıdır; durdurmak için kısayol tuşunu kullan.
+**Güvenmek istersen:**
+- Kaynak kodun tamamı bu depoda açık; exe **Actions** sekmesinde görülebilen bir işlemle bu koddan üretilir.
+- Program yalnızca seçtiğin kısayol tuşlarını (`F6`, `F7`) dinler, yazdıklarını kaydetmez. İnternete bağlanmaz; yazdığı tek dosya ayar dosyasıdır (`~/.novaclick.json`).
+- Exe'yi [VirusTotal](https://www.virustotal.com)'a yükleyip kontrol edebilirsin.
+- İstersen exe yerine kaynak koddan çalıştır ya da `build.bat` ile kendin üret.
 
 ## Sorumlu kullanım
 
 Bu araç kişisel kullanım ve otomasyon içindir. Çevrimiçi oyunlarda ve kuralların otomatik tıklamayı yasakladığı servislerde kullanmak hesabının kapatılmasına yol açabilir. Sorumluluk kullanıcıya aittir.
 
-## Lisans
-
-[MIT](LICENSE)
-
 ---
 
-## English
+# 🇬🇧 English
 
-**NovaClick** is a modern, feature-rich, open-source autoclicker for Windows built with Python, CustomTkinter and pynput. It has millisecond-precision intervals, random jitter, global hotkeys (toggle / hold), fixed-position clicking, profiles, live stats and a **background mode** that clicks a chosen spot in a chosen window without moving your real mouse.
+A modern, feature-rich, open-source auto clicker for Windows. The interface is available in **English and Turkish** (Settings → Language).
 
-**Built together with [Claude](https://claude.ai) by Anthropic.**
+## Features
+
+- **Precise interval:** hours / minutes / seconds / milliseconds, quick CPS presets, random jitter
+- **Hold time:** reduces the clicks that games miss
+- **4 click methods:** Cursor · Fixed point · **Window (game mode)** · Background
+- **Window mode:** clicks a spot inside the chosen window with real mouse input, pauses while the window is inactive (or brings it to the front)
+- **Point sequences & macro recorder:** click several points in order, give each point its own wait time, record your clicks (`F7`)
+- **Game presets:** click simulator, fast, human-like, turbo
+- **Global hotkey:** `F6` by default, changeable; toggle or hold
+- **Safety:** start delay, time limit, repeat count, failsafe corner
+- **Live stats:** click count, live CPS, elapsed time and a CPS graph
+- **Test click & diagnostics:** try the chosen method with 3 clicks, see whether the hotkey is received and whether there is an administrator-rights mismatch
+- **Profiles**, 5 accent colors, always on top, minimize to tray
+
+## Installation
+
+### 1) Ready-made exe (easiest)
+Download `novaclick.exe` from the [Releases](../../releases/latest) page and double-click it. No Python needed. The exe is built automatically from the source code in this repository with GitHub Actions.
+
+> ⚠️ Windows may show a warning on first launch. That is normal, see [below](#windows-smartscreen-warning).
+
+### 2) Run from source
+Requires [Python 3.10+](https://www.python.org/downloads/) (tick **Add python.exe to PATH** during setup).
 
 ```bash
+git clone https://github.com/rrchech011/NovaClick.git
+cd NovaClick
 pip install -r requirements.txt
 python novaclick.py
 ```
 
-**Windows SmartScreen note:** the exe is not code-signed yet, so Windows may show a "Windows protected your PC" warning on first launch. Click **More info → Run anyway**. The full source is in this repo and the exe is built from it by GitHub Actions.
+### 3) Build your own exe
+Double-click `build.bat`.
 
-Licensed under MIT. Use responsibly: automated clicking may violate the rules of online games and some services.
+## Click methods
+
+| Method | What it does | Use it for |
+|---|---|---|
+| **Cursor** | Clicks wherever the mouse is | Simple use |
+| **Fixed** | Clicks a fixed screen coordinate | Single-screen, static UIs |
+| **Window** | Clicks a spot inside the chosen window with real mouse input; pauses or brings the window to front when it is inactive | **Games** |
+| **Background** | Sends click messages to a window without using your mouse | Browsers, classic apps |
+
+### Notes for games
+- Set **Hold time** to 10–30 ms. Games try to catch a click within a single frame.
+- Use the **Window** method for games. **Background** does not work in most games because they ignore those messages.
+- If the game runs as administrator, start NovaClick as administrator too (**Settings → Diagnostics → Restart as administrator**). Otherwise Windows blocks both the clicks and the hotkey.
+- Window mode uses the real mouse, so you cannot use your mouse for other things while the game is active. **Bring to front** eases this but is experimental and flickers briefly on every click.
+- Some games forbid automated clicking. Check their rules.
+
+## Usage
+
+1. Choose the interval and click options on the **Clicking** page.
+2. Choose the method on the **Target** page. For Window/Background, press **Pick window** and click the spot you want clicked once in the target window.
+3. Press `F6` to start and `F6` again to stop.
+4. With Fixed/Cursor, move the mouse to the top-left corner of the screen for an emergency stop.
+
+## Windows SmartScreen warning
+
+On first launch Windows may show **"Windows protected your PC"**. This is because the exe is not code-signed yet and Windows is cautious with new files. It does not mean the file is harmful.
+
+**To run it:** **More info** → **Run anyway**.
+
+**If you want to verify:**
+- The full source is in this repo; the exe is built from it by a process you can inspect in the **Actions** tab.
+- The program only listens for your chosen hotkeys (`F6`, `F7`) and does not log what you type. It makes no network connections; the only file it writes is the settings file (`~/.novaclick.json`).
+- You can upload the exe to [VirusTotal](https://www.virustotal.com).
+- Or run from source / build it yourself with `build.bat`.
+
+## Responsible use
+
+This tool is for personal use and automation. Using it in online games or services that forbid automated clicking may get your account banned. Use at your own risk.
+
+---
+
+## License / Lisans
+
+[MIT](LICENSE)
