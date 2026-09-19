@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt pyinstaller
 
       - name: Exe uret
-        run: pyinstaller --noconsole --onefile --clean --icon=novaclick.ico --add-data "novaclick.ico;." --collect-all customtkinter novaclick.py
+        run: pyinstaller --noconsole --onefile --clean --icon=novaclick.ico --add-data "novaclick.ico;." --collect-all customtkinter --hidden-import pystray._win32 novaclick.py
 
       - name: Exe'yi artifact olarak kaydet
         uses: actions/upload-artifact@v4
