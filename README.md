@@ -27,7 +27,7 @@ Modern arayüzlü, gelişmiş ve açık kaynaklı otomatik tıklayıcı (autocli
 ### 1) Hazır exe (en kolayı)
 [Releases](../../releases/latest) sayfasından `novaclick.exe` dosyasını indir ve çift tıkla. Python kurmana, kurulum yapmana gerek yok; Windows 10/11 (64 bit) yeterli. Exe, GitHub Actions ile bu depodaki kaynak koddan otomatik üretilir.
 
-> Windows SmartScreen veya antivirüs uyarı verebilir (klavye kısayolu dinleyen, PyInstaller ile üretilmiş programlarda sık görülür). Kaynak kod bu depoda açık, isteyen kendi exe'sini üretebilir.
+> ⚠️ İlk açılışta Windows bir uyarı gösterebilir. Bu normaldir, nedenini ve nasıl geçeceğini [aşağıda](#windows-uyarısı-smartscreen) anlattım.
 
 ### 2) Kaynak koddan çalıştırma
 [Python 3.10+](https://www.python.org/downloads/) kurulu olmalı (kurulumda **Add python.exe to PATH** işaretli olsun).
@@ -48,6 +48,24 @@ pyinstaller --noconsole --onefile --clean --icon=novaclick.ico --add-data "novac
 ```
 
 Exe `dist\novaclick.exe` olarak oluşur.
+
+## Windows uyarısı (SmartScreen)
+
+Exe'yi ilk çalıştırdığında **"Windows kişisel bilgisayarınızı korudu"** ekranı çıkabilir ve yayımcı olarak "Bilinmeyen yayımcı" yazabilir. Bunun nedeni, exe'nin henüz dijital olarak imzalı olmaması ve Windows'un yeni, tanınmayan dosyalara temkinli davranmasıdır. Dosyanın zararlı olduğu anlamına gelmez. Şu an exe imzalı değil.
+
+**Çalıştırmak için:**
+
+1. Uyarı ekranında **Ek bilgi**'ye tıkla.
+2. Çıkan **Yine de çalıştır** düğmesine bas.
+
+**Güvenmek istersen:**
+
+- Kaynak kodun tamamı bu depoda açık. Exe, bu koddan GitHub Actions ile otomatik üretilir; **Actions** sekmesinde üretim kayıtlarını görebilirsin.
+- Program yalnızca senin seçtiğin kısayol tuşunu (varsayılan `F6`) dinler, yazdıklarını kaydetmez. İnternete bağlanmaz; yazdığı tek dosya ayar dosyasıdır (`~/.novaclick.json`). Kodu `novaclick.py` içinde inceleyebilirsin.
+- Exe'yi [VirusTotal](https://www.virustotal.com)'a yükleyip kontrol edebilirsin.
+- İstersen exe yerine kaynak koddan çalıştır ya da `build.bat` ile exe'yi kendin üret.
+
+Klavye kısayolu dinleyen, PyInstaller ile üretilmiş programlar bazı antivirüslerde yanlış alarm verebilir. Böyle bir durumda yukarıdaki yollardan birini kullanabilirsin.
 
 ## Kullanım
 
@@ -89,5 +107,7 @@ Bu araç kişisel kullanım ve otomasyon içindir. Çevrimiçi oyunlarda ve kura
 pip install -r requirements.txt
 python novaclick.py
 ```
+
+**Windows SmartScreen note:** the exe is not code-signed yet, so Windows may show a "Windows protected your PC" warning on first launch. Click **More info → Run anyway**. The full source is in this repo and the exe is built from it by GitHub Actions.
 
 Licensed under MIT. Use responsibly: automated clicking may violate the rules of online games and some services.
