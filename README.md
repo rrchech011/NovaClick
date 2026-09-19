@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/32425082/README.md)
 # ⚡ NovaClick
 
 **🇹🇷 [Türkçe](#-türkçe) · 🇬🇧 [English](#-english)**
