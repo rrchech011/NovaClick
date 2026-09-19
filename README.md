@@ -2,7 +2,7 @@
 
 **🇹🇷 [Türkçe](#-türkçe) · 🇬🇧 [English](#-english)**
 
-![NovaClick screenshot](NovaClicker.png)
+![NovaClick screenshot](screenshot)
 
 > 🤖 **Bu proje, Anthropic'in yapay zekâ asistanı [Claude](https://claude.ai) ile birlikte geliştirilmiştir.**
 > 🤖 **Built together with [Claude](https://claude.ai), Anthropic's AI assistant.**
