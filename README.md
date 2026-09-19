@@ -33,7 +33,7 @@ Modern arayüzlü, gelişmiş ve açık kaynaklı otomatik tıklayıcı (autocli
 [Python 3.10+](https://www.python.org/downloads/) kurulu olmalı (kurulumda **Add python.exe to PATH** işaretli olsun).
 
 ```bash
-git clone https://github.com/KULLANICI_ADIN/NovaClick.git
+git clone https://github.com/rrchech011/NovaClick.git
 cd NovaClick
 pip install -r requirements.txt
 python novaclick.py
